@@ -5,7 +5,7 @@
 var fs = require('fs'),
     path = require('path'),
     _ = require('lodash'),
-    // yml = require('js-yaml'),
+    yml = require('js-yaml'),
     parseIgnore = require('parse-gitignore');
 
 describe('project repository', function () {
@@ -197,13 +197,13 @@ describe('project repository', function () {
         });
     });
 
-    describe('Changelog.yaml', function () {
+    describe('CHANGELOG.yaml', function () {
         it('should exist', function (done) {
-            fs.stat('./Changelog.yaml', done);
+            fs.stat('./CHANGELOG.yaml', done);
         });
 
         it('should have readable content', function () {
-            // expect(yml.safeLoad(fs.readFileSync('./CHANGELOG.yaml')), 'not a valid yaml').to.be.ok;
+            expect(yml.safeLoad(fs.readFileSync('./CHANGELOG.yaml')), 'not a valid yaml').to.be.ok;
         });
     });
 });
