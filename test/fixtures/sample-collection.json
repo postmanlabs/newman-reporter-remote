@@ -1,627 +1,592 @@
 {
-	"info": {
-		"_postman_id": "241be0a2-a9c1-4119-8e37-6dbe2b5af464",
-		"name": "Sample Collection",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Folder One",
-			"item": [
-				{
-					"name": "Just GET request in folder",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "ee24fcf9-620e-4c24-bf40-66978418f514",
-								"exec": [
-									"pm.test(\"Status code is 200\", function () {",
-									"    pm.response.to.have.status(200);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"url": {
-							"raw": "{{host}}/get",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"get"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "b2b1c403-cac0-442e-8bcb-64b777660294",
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "558a4065-8393-4788-9c9e-0bc0bf43d83a",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						]
-					}
-				}
-			]
-		},
-		{
-			"name": "Just GET request",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{host}}/get",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"get"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Just GET req with error",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "35a42817-064b-4a6e-a6b6-d743a9595bfe",
-						"exec": [
-							"zyx();"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "6f84b82c-783b-4a90-80e2-1facc534ca53",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "ftp:://www.postman-echo.com/get",
-					"host": [
-						"ftp::"
-					],
-					"port": "",
-					"path": [
-						"",
-						"www.postman-echo.com",
-						"get"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Just GET request with console",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "6210c6a6-14f9-4182-9778-524df5329f59",
-						"exec": [
-							"console.error('This is a error log')"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "33f4db83-bcb7-4fab-aa49-aa82b90f312e",
-						"exec": [
-							"console.log('This is a normal log')"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{host}}/get",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"get"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Environment Variable",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "038cd1a8-a090-490b-9338-ceb46bbb23b4",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "b3aefcb7-575b-40f6-a32b-07bb4e3c0389",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{host}}/get?secret={{API_KEY}}",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"get"
-					],
-					"query": [
-						{
-							"key": "secret",
-							"value": "{{API_KEY}}"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Assertions",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "ab91d76c-0922-47fd-ae9f-6d1bc3e892e0",
-						"exec": [
-							"const userId = pm.iterationData.get(\"userId\") || \"1\";",
-							"",
-							"pm.variables.set(\"USER_ID\", userId);"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "6bb58362-17c8-4d06-8bca-cf9831e9a1dd",
-						"exec": [
-							"const userId = pm.variables.get(\"USER_ID\"),",
-							"    jsonData = pm.response.json();",
-							"",
-							"pm.test(\"UserId is correct\", function() {",
-							"    pm.expect(jsonData.data).to.have.property(\"secret\");",
-							"    pm.expect(jsonData.data).to.have.property(\"userId\");",
-							"});",
-							"",
-							"pm.test(\"Response Headers are correct\", function() {",
-							"    pm.response.to.have.header(\"Content-Type\");",
-							"    pm.response.to.have.header(\"Content-Length\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"secret\": {{API_KEY}},\n\t\"userId\": {{USER_ID}}\n}"
-				},
-				"url": {
-					"raw": "{{host}}/post",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"post"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Failing Assertion",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "ab91d76c-0922-47fd-ae9f-6d1bc3e892e0",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "6bb58362-17c8-4d06-8bca-cf9831e9a1dd",
-						"exec": [
-							"const userId = pm.variables.get(\"USER_ID\"),",
-							"    jsonData = pm.response.json();",
-							"",
-							"pm.test(\"UserId is correct\", function() {",
-							"    pm.expect(jsonData.data).to.have.property(\"userId\", 1);",
-							"});",
-							"",
-							"pm.test(\"Response Headers are correct\", function() {",
-							"    pm.response.to.have.header(\"Content-Type\");",
-							"    pm.response.to.have.header(\"X-API-KEY\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"secret\": {{API_KEY}}\n}"
-				},
-				"url": {
-					"raw": "{{host}}/post",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"post"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Skipped Assertions",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "ab91d76c-0922-47fd-ae9f-6d1bc3e892e0",
-						"exec": [
-							"const userId = pm.iterationData.get(\"userId\") || \"1\";",
-							"",
-							"pm.variables.set(\"USER_ID\", userId);"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "6bb58362-17c8-4d06-8bca-cf9831e9a1dd",
-						"exec": [
-							"const userId = pm.variables.get(\"USER_ID\"),",
-							"    jsonData = pm.response.json();",
-							"",
-							"pm.test.skip(\"UserId is correct\", function() {",
-							"    pm.expect(jsonData.data).to.have.property(\"secret\");",
-							"    pm.expect(jsonData.data).to.have.property(\"userId\");",
-							"});",
-							"",
-							"pm.test.skip(\"Response Headers are correct\", function() {",
-							"    pm.response.to.have.header(\"Content-Type\");",
-							"    pm.response.to.have.header(\"Content-Length\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"secret\": {{API_KEY}},\n\t\"userId\": {{USER_ID}}\n}"
-				},
-				"url": {
-					"raw": "{{host}}/post",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"post"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "sendRequest",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "0ac4712e-55c5-4822-bc69-de1aa63bc752",
-						"exec": [
-							"pm.sendRequest('https://postman-echo.com/get', function(err, res) {",
-							"    if (err) {",
-							"        console.log(err);",
-							"    }",
-							"    pm.test('sendRequest: response should be okay to process', function() {",
-							"        pm.expect(err).to.equal(null);",
-							"        pm.expect(res).to.have.property('code', 200);",
-							"        pm.expect(res).to.have.property('status', 'OK');",
-							"    });",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "9324c283-43a1-4716-a90f-bac15caa8c30",
-						"exec": [
-							"pm.test(\"Args are correct\", function() {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.args).to.eql({",
-							"        foo: \"bar\"",
-							"    });",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{host}}/get?foo=bar",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"get"
-					],
-					"query": [
-						{
-							"key": "foo",
-							"value": "bar"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "setNextRequest",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "ab6de8a3-32c0-4bb8-965b-6b223911b1b2",
-						"exec": [
-							"postman.setNextRequest(\"Done\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{host}}/get",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"get"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Skip",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "{{host}}/get",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"get"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Done",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "bd21f8e4-0889-4247-9251-590c14132f0c",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "e95d4e55-9196-4cb2-b3c1-965f45185dcd",
-						"exec": [
-							"pm.test(\"Response time is less than 1s\", function () {",
-							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "{{API_KEY}}",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "postman",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "key",
-							"value": "{{API_KEY}}",
-							"type": "text"
-						},
-						{
-							"key": "id",
-							"value": "{{$guid}}",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "{{host}}/post?end=true",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"post"
-					],
-					"query": [
-						{
-							"key": "end",
-							"value": "true"
-						}
-					]
-				}
-			},
-			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "59300a4b-e96e-43fa-9c40-d059b9153dcd",
-				"type": "text/javascript",
-				"exec": [
-					"!pm.environment.get(\"API_KEY\") && pm.environment.set(\"API_KEY\", \"0\");"
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"id": "aafbd39f-7b1a-41ad-a518-43d64fbddb1b",
-				"type": "text/javascript",
-				"exec": [
-					"pm.test(\"Status code is 200\", function () {",
-					"    pm.response.to.have.status(200);",
-					"});"
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"id": "c8532587-e0da-4fa0-821d-a032c233bd83",
-			"key": "host",
-			"value": "https://postman-echo.com",
-			"type": "string"
-		}
-	]
+  "info": {
+    "_postman_id": "241be0a2-a9c1-4119-8e37-6dbe2b5af464",
+    "name": "Sample Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [{
+      "name": "Folder One",
+      "item": [{
+        "name": "Just GET request in folder",
+        "event": [{
+          "listen": "test",
+          "script": {
+            "id": "ee24fcf9-620e-4c24-bf40-66978418f514",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }],
+        "request": {
+          "method": "GET",
+          "header": [],
+          "body": {},
+          "url": {
+            "raw": "{{host}}/get",
+            "host": [
+              "{{host}}"
+            ],
+            "path": [
+              "get"
+            ]
+          }
+        },
+        "response": []
+      }],
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "b2b1c403-cac0-442e-8bcb-64b777660294",
+            "type": "text/javascript",
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "558a4065-8393-4788-9c9e-0bc0bf43d83a",
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Just GET request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "{{host}}/get",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "get"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Just GET req with error",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "35a42817-064b-4a6e-a6b6-d743a9595bfe",
+            "exec": [
+              "zyx();"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "6f84b82c-783b-4a90-80e2-1facc534ca53",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "ftp:://www.postman-echo.com/get",
+          "host": [
+            "ftp::"
+          ],
+          "port": "",
+          "path": [
+            "",
+            "www.postman-echo.com",
+            "get"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Just GET request with console",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "6210c6a6-14f9-4182-9778-524df5329f59",
+            "exec": [
+              "console.error('This is a error log')"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "33f4db83-bcb7-4fab-aa49-aa82b90f312e",
+            "exec": [
+              "console.log('This is a normal log')"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "{{host}}/get",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "get"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Environment Variable",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "038cd1a8-a090-490b-9338-ceb46bbb23b4",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "b3aefcb7-575b-40f6-a32b-07bb4e3c0389",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "{{host}}/get?secret={{API_KEY}}",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "get"
+          ],
+          "query": [{
+            "key": "secret",
+            "value": "{{API_KEY}}"
+          }]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Assertions",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "ab91d76c-0922-47fd-ae9f-6d1bc3e892e0",
+            "exec": [
+              "const userId = pm.iterationData.get(\"userId\") || \"1\";",
+              "",
+              "pm.variables.set(\"USER_ID\", userId);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "6bb58362-17c8-4d06-8bca-cf9831e9a1dd",
+            "exec": [
+              "const userId = pm.variables.get(\"USER_ID\"),",
+              "    jsonData = pm.response.json();",
+              "",
+              "pm.test(\"UserId is correct\", function() {",
+              "    pm.expect(jsonData.data).to.have.property(\"secret\");",
+              "    pm.expect(jsonData.data).to.have.property(\"userId\");",
+              "});",
+              "",
+              "pm.test(\"Response Headers are correct\", function() {",
+              "    pm.response.to.have.header(\"Content-Type\");",
+              "    pm.response.to.have.header(\"Content-Length\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{
+          "key": "Content-Type",
+          "name": "Content-Type",
+          "value": "application/json",
+          "type": "text"
+        }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"secret\": {{API_KEY}},\n\t\"userId\": {{USER_ID}}\n}"
+        },
+        "url": {
+          "raw": "{{host}}/post",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "post"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Failing Assertion",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "ab91d76c-0922-47fd-ae9f-6d1bc3e892e0",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "6bb58362-17c8-4d06-8bca-cf9831e9a1dd",
+            "exec": [
+              "const userId = pm.variables.get(\"USER_ID\"),",
+              "    jsonData = pm.response.json();",
+              "",
+              "pm.test(\"UserId is correct\", function() {",
+              "    pm.expect(jsonData.data).to.have.property(\"userId\", 1);",
+              "});",
+              "",
+              "pm.test(\"Response Headers are correct\", function() {",
+              "    pm.response.to.have.header(\"Content-Type\");",
+              "    pm.response.to.have.header(\"X-API-KEY\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{
+          "key": "Content-Type",
+          "name": "Content-Type",
+          "value": "application/json",
+          "type": "text"
+        }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"secret\": {{API_KEY}}\n}"
+        },
+        "url": {
+          "raw": "{{host}}/post",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "post"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Skipped Assertions",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "ab91d76c-0922-47fd-ae9f-6d1bc3e892e0",
+            "exec": [
+              "const userId = pm.iterationData.get(\"userId\") || \"1\";",
+              "",
+              "pm.variables.set(\"USER_ID\", userId);"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "6bb58362-17c8-4d06-8bca-cf9831e9a1dd",
+            "exec": [
+              "const userId = pm.variables.get(\"USER_ID\"),",
+              "    jsonData = pm.response.json();",
+              "",
+              "pm.test.skip(\"UserId is correct\", function() {",
+              "    pm.expect(jsonData.data).to.have.property(\"secret\");",
+              "    pm.expect(jsonData.data).to.have.property(\"userId\");",
+              "});",
+              "",
+              "pm.test.skip(\"Response Headers are correct\", function() {",
+              "    pm.response.to.have.header(\"Content-Type\");",
+              "    pm.response.to.have.header(\"Content-Length\");",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [{
+          "key": "Content-Type",
+          "name": "Content-Type",
+          "type": "text",
+          "value": "application/json"
+        }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n\t\"secret\": {{API_KEY}},\n\t\"userId\": {{USER_ID}}\n}"
+        },
+        "url": {
+          "raw": "{{host}}/post",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "post"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sendRequest",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "0ac4712e-55c5-4822-bc69-de1aa63bc752",
+            "exec": [
+              "pm.sendRequest('https://postman-echo.com/get', function(err, res) {",
+              "    if (err) {",
+              "        console.log(err);",
+              "    }",
+              "    pm.test('sendRequest: response should be okay to process', function() {",
+              "        pm.expect(err).to.equal(null);",
+              "        pm.expect(res).to.have.property('code', 200);",
+              "        pm.expect(res).to.have.property('status', 'OK');",
+              "    });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "9324c283-43a1-4716-a90f-bac15caa8c30",
+            "exec": [
+              "pm.test(\"Args are correct\", function() {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.args).to.eql({",
+              "        foo: \"bar\"",
+              "    });",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "{{host}}/get?foo=bar",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "get"
+          ],
+          "query": [{
+            "key": "foo",
+            "value": "bar"
+          }]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "setNextRequest",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "id": "ab6de8a3-32c0-4bb8-965b-6b223911b1b2",
+          "exec": [
+            "postman.setNextRequest(\"Done\");"
+          ],
+          "type": "text/javascript"
+        }
+      }],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "{{host}}/get",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "get"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Skip",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {},
+        "url": {
+          "raw": "{{host}}/get",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "get"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Done",
+      "event": [{
+          "listen": "prerequest",
+          "script": {
+            "id": "bd21f8e4-0889-4247-9251-590c14132f0c",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "id": "e95d4e55-9196-4cb2-b3c1-965f45185dcd",
+            "exec": [
+              "pm.test(\"Response time is less than 1s\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [{
+              "key": "password",
+              "value": "{{API_KEY}}",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "postman",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [{
+          "key": "Content-Type",
+          "name": "Content-Type",
+          "value": "application/json",
+          "type": "text"
+        }],
+        "body": {
+          "mode": "formdata",
+          "formdata": [{
+              "key": "key",
+              "value": "{{API_KEY}}",
+              "type": "text"
+            },
+            {
+              "key": "id",
+              "value": "{{$guid}}",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{host}}/post?end=true",
+          "host": [
+            "{{host}}"
+          ],
+          "path": [
+            "post"
+          ],
+          "query": [{
+            "key": "end",
+            "value": "true"
+          }]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [{
+      "listen": "prerequest",
+      "script": {
+        "id": "59300a4b-e96e-43fa-9c40-d059b9153dcd",
+        "type": "text/javascript",
+        "exec": [
+          "!pm.environment.get(\"API_KEY\") && pm.environment.set(\"API_KEY\", \"0\");"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "aafbd39f-7b1a-41ad-a518-43d64fbddb1b",
+        "type": "text/javascript",
+        "exec": [
+          "pm.test(\"Status code is 200\", function () {",
+          "    pm.response.to.have.status(200);",
+          "});"
+        ]
+      }
+    }
+  ],
+  "variable": [{
+    "id": "c8532587-e0da-4fa0-821d-a032c233bd83",
+    "key": "host",
+    "value": "https://postman-echo.com",
+    "type": "string"
+  }]
 }
