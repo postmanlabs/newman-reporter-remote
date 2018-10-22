@@ -1,10 +1,11 @@
 const nock = require('nock'),
-    Ajv = require('ajv');
+    Ajv = require('ajv'),
+    EXECUTION_SCHEMA = require('../../examples/schema.json');
 
 describe('Newman Library', function () {
     before(function (done) {
         var ajv = new Ajv(),
-            validate = ajv.compile(require('../../examples/schema.json'));
+            validate = ajv.compile(EXECUTION_SCHEMA);
 
         nock('http://localhost:3000')
             .persist()
