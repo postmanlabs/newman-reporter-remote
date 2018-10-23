@@ -53,7 +53,7 @@ newman.run({
             },
 
             // custom handling of execution summary
-            callback: function(summary) {
+            callback: function (summary) {
                 // custom logic goes here
             }
         }
