@@ -1,0 +1,798 @@
+{
+  "$id": "https://schema.getpostman.com/json/execution/v1.0.0/execution.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Execution Schema",
+  "required": [
+    "run",
+    "collection",
+    "environment",
+    "items",
+    "executions",
+    "scripts",
+    "events",
+    "requests",
+    "responses",
+    "assertions",
+    "errors",
+    "consoles"
+  ],
+  "properties": {
+    "run": {
+      "$id": "#/properties/run",
+      "type": "object",
+      "title": "The Run Schema",
+      "required": [
+        "id",
+        "type",
+        "agent"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/run/properties/id",
+          "type": "string",
+          "title": "Id of the run",
+          "examples": [
+            "72a1bbc0-06a4-4e5c-a41a-e32cdf627246"
+          ],
+          "pattern": "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$"
+        },
+        "type": {
+          "$id": "#/properties/run/properties/type",
+          "type": "string",
+          "title": "The type of run",
+          "default": "waterfall",
+          "examples": [
+            "waterfall"
+          ]
+        },
+        "agent": {
+          "$id": "#/properties/run/properties/agent",
+          "type": "object",
+          "title": "The agent who executed the collection",
+          "required": [
+            "name",
+            "version",
+            "platform"
+          ],
+          "properties": {
+            "name": {
+              "$id": "#/properties/run/properties/agent/properties/name",
+              "type": "string",
+              "title": "The name of the agent",
+              "examples": [
+                "newman"
+              ]
+            },
+            "version": {
+              "$id": "#/properties/run/properties/agent/properties/version",
+              "type": "string",
+              "title": "The version of the agent",
+              "examples": [
+                "4.1.0"
+              ]
+            },
+            "platform": {
+              "$id": "#/properties/run/properties/agent/properties/platform",
+              "type": "string",
+              "title": "The platform where the agent is running",
+              "examples": [
+                "darwin"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "collection": {
+      "$id": "#/properties/collection",
+      "type": "object",
+      "title": "The collection reference",
+      "required": [
+        "id",
+        "$ref",
+        "info"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/collection/properties/id",
+          "type": "string",
+          "title": "The id of the collection",
+          "examples": [
+            "241be0a2-a9c1-4119-8e37-6dbe2b5af464"
+          ]
+        },
+        "$ref": {
+          "$id": "#/properties/collection/properties/$ref",
+          "type": "array",
+          "examples": [
+            ["collection", "241be0a2-a9c1-4119-8e37-6dbe2b5af464"]
+          ]
+        },
+        "info": {
+          "$id": "#/properties/collection/properties/info",
+          "type": "object",
+          "title": "Meta information about the collection",
+          "required": [
+            "name",
+            "schema"
+          ],
+          "properties": {
+            "name": {
+              "$id": "#/properties/collection/properties/info/properties/name",
+              "type": "string",
+              "title": "The name of the collection",
+              "examples": [
+                "Sample Collection"
+              ]
+            },
+            "schema": {
+              "$id": "#/properties/collection/properties/info/properties/schema",
+              "type": "string",
+              "title": "The schema of the collection",
+              "examples": [
+                "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "environment": {
+      "$id": "#/properties/environment",
+      "type": "object",
+      "title": "The environment to use for the run",
+      "required": [
+        "id",
+        "$ref",
+        "info"
+      ],
+      "properties": {
+        "id": {
+          "$id": "#/properties/environment/properties/id",
+          "type": "string",
+          "title": "The id of the environment",
+          "examples": [
+            "c85201fb-5bb3-49af-98d7-110a631ae1b4"
+          ]
+        },
+        "$ref": {
+          "$id": "#/properties/environment/properties/$ref",
+          "type": "array",
+          "title": "The remote reference to the environment",
+          "examples": [
+            ["environment", "c85201fb-5bb3-49af-98d7-110a631ae1b4"]
+          ]
+        },
+        "info": {
+          "$id": "#/properties/environment/properties/info",
+          "type": "object",
+          "title": "Meta about the environment"
+        }
+      }
+    },
+    "items": {
+      "$id": "#/properties/items",
+      "type": "object",
+      "title": "The different items in this run",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "$ref",
+            "path"
+          ],
+          "properties": {
+            "$ref": {
+              "type": "array",
+              "title": "The reference to this item",
+              "examples": [
+                ["request", "be2a896b-eb72-4e35-b2b8-43e8016c5a85"]
+              ]
+            },
+            "path": {
+              "type": "array",
+              "title": "The path leading to this item in the collection",
+              "examples": [
+                ["be2a896b-eb72-4e35-b2b8-43e8016c5a85"]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "executions": {
+      "$id": "#/properties/executions",
+      "type": "array",
+      "title": "The sequence in which the collection is executed",
+      "items": {
+        "$id": "#/properties/executions/items",
+        "type": "object",
+        "required": [
+          "id",
+          "index",
+          "branch",
+          "type",
+          "model",
+          "cursor",
+          "run",
+          "timings"
+        ],
+        "properties": {
+          "id": {
+            "$id": "#/properties/executions/items/properties/id",
+            "type": "string",
+            "title": "The id of this executions",
+            "examples": [
+              "4202c97e-80b9-444f-9dd4-aa4893634ee0"
+            ]
+          },
+          "index": {
+            "$id": "#/properties/executions/items/properties/index",
+            "type": "integer",
+            "title": "Index of the executions",
+            "minimum": 0,
+            "examples": [
+              0
+            ]
+          },
+          "branch": {
+            "$id": "#/properties/executions/items/properties/branch",
+            "type": "integer",
+            "title": "For future use case of parallel runs",
+            "minimum": 0,
+            "default": 0,
+            "examples": [
+              0
+            ]
+          },
+          "type": {
+            "$id": "#/properties/executions/items/properties/type",
+            "type": "string",
+            "title": "The type of current execution",
+            "examples": [
+              "script", "request"
+            ]
+          },
+          "model": {
+            "$id": "#/properties/executions/items/properties/model",
+            "type": "object",
+            "title": "The reference model",
+            "required": [
+              "$self"
+            ],
+            "properties": {
+              "$self": {
+                "$id": "#/properties/executions/items/properties/model/properties/$self",
+                "type": "array",
+                "title": "Self reference in the model",
+                "examples": [
+                  ["events", "64148fe0-683d-4dbe-ba68-b0c62be2beda"]
+                ]
+              }
+            }
+          },
+          "cursor": {
+            "$id": "#/properties/executions/items/properties/cursor",
+            "type": "object",
+            "title": "The Runtime Cursor"
+          },
+          "run": {
+            "$id": "#/properties/executions/items/properties/run",
+            "type": "object",
+            "required": [
+              "$self"
+            ],
+            "properties": {
+              "$self": {
+                "$id": "#/properties/executions/items/properties/run/properties/$self",
+                "type": "array",
+                "title": "Self reference to the run this executions is part of",
+                "examples": [
+                  ["run", "72a1bbc0-06a4-4e5c-a41a-e32cdf627246"]
+                ]
+              }
+            }
+          },
+          "error": {
+            "oneOf": [{
+              "type": "object",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "$id": "#/properties/executions/items/properties/run/properties/$self",
+                  "type": "array",
+                  "title": "Self reference to this error",
+                  "examples": [
+                    ["error", "72a1bbc0-06a4-4e5c-a41a-e32cdf627246"]
+                  ]
+                }
+              }
+            }, {
+              "type": "null"
+            }]
+          },
+          "timings": {
+            "$id": "#/properties/executions/items/properties/timings",
+            "type": "object",
+            "title": "Execution timings",
+            "required": [
+              "started",
+              "completed"
+            ],
+            "properties": {
+              "started": {
+                "$id": "#/properties/executions/items/properties/timings/properties/started",
+                "type": "integer",
+                "title": "Execution start time",
+                "minimum": 0,
+                "examples": [
+                  1538740072277
+                ]
+              },
+              "completed": {
+                "$id": "#/properties/executions/items/properties/timings/properties/completed",
+                "type": "integer",
+                "title": "Execution end time",
+                "minimum": 0,
+                "examples": [
+                  1538740072294
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "scripts": {
+      "$id": "#/properties/scripts",
+      "type": "object",
+      "title": "Scripts executed during the execution",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "id",
+            "listen",
+            "execution",
+            "event"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "The id of this script",
+              "examples": [
+                "4cb5637c-e2d2-4fa2-96de-387c052b9aa9"
+              ]
+            },
+            "listen": {
+              "type": "string",
+              "title": "Script type",
+              "examples": [
+                "prerequest", "test"
+              ]
+            },
+            "execution": {
+              "type": "object",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the execution in which this script is executed",
+                  "examples": [
+                    ["executions", "4202c97e-80b9-444f-9dd4-aa4893634ee0"]
+                  ]
+                }
+              }
+            },
+            "event": {
+              "type": "object",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the event in which this script is defined",
+                  "examples": [
+                    ["events", "59300a4b-e96e-43fa-9c40-d059b9153dcd"]
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "events": {
+      "$id": "#/properties/events",
+      "type": "object",
+      "title": "The different events defined in the collection",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "path"
+          ],
+          "properties": {
+            "path": {
+              "type": "array",
+              "title": "The path leading to this event in the collection",
+              "examples": [
+                ["be2a896b-eb72-4e35-b2b8-43e8016c5a85"]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "requests": {
+      "$id": "#/properties/requests",
+      "type": "object",
+      "title": "The Requests Schema",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "title": "The requests sent during the collection run",
+          "required": [
+            "id",
+            "execution",
+            "response",
+            "url",
+            "method"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "The id of this request",
+              "examples": [
+                "a6f073a7-6b99-41ac-81a1-6d9e261b0de9"
+              ]
+            },
+            "execution": {
+              "type": "object",
+              "title": "The executions in which this request is sent",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the executions",
+                  "examples": [
+                    ["executions", "4202c97e-80b9-444f-9dd4-aa4893634ee0"]
+                  ]
+                }
+              }
+            },
+            "response": {
+              "type": "object",
+              "title": "The response stream",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the responses",
+                  "examples": [
+                    ["responses", "38929ec0-db24-4706-aee6-47a54f1e7f80"]
+                  ]
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "title": "The URL of this request",
+              "examples": [
+                "https://postman-echo.com/get"
+              ]
+            },
+            "method": {
+              "type": "string",
+              "title": "The HTTP method of this request",
+              "examples": [
+                "GET"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "$id": "#/properties/responses",
+      "type": "object",
+      "title": "The Responses Schema",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "title": "The response received from the request",
+          "required": [
+            "request",
+            "id",
+            "status",
+            "code",
+            "responseTime",
+            "responseSize"
+          ],
+          "properties": {
+            "request": {
+              "type": "object",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the request",
+                  "examples": [
+                    ["request", "23f43d18-e9b7-4fe4-b5ed-ee3cbe5a5b52"]
+                  ]
+                }
+              }
+            },
+            "id": {
+              "type": "string",
+              "title": "Response identifier",
+              "examples": [
+                "38929ec0-db24-4706-aee6-47a54f1e7f80"
+              ]
+            },
+            "status": {
+              "type": "string",
+              "title": "Response status",
+              "examples": [
+                "OK"
+              ]
+            },
+            "code": {
+              "type": "integer",
+              "title": "Response status code",
+              "minimum": 0,
+              "examples": [
+                200
+              ]
+            },
+            "responseTime": {
+              "type": "integer",
+              "title": "Response time",
+              "minimum": 0,
+              "examples": [
+                4388
+              ]
+            },
+            "responseSize": {
+              "type": "integer",
+              "title": "Response size",
+              "minimum": 0,
+              "examples": [
+                224
+              ]
+            }
+          }
+        }
+      }
+    },
+    "assertions": {
+      "$id": "#/properties/assertions",
+      "type": "object",
+      "title": "The Assertions Schema",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "id",
+            "name",
+            "script"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Assertion identifier",
+              "examples": [
+                "77104349-67f2-4372-bb02-e6d2e0d95d78"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "title": "Assertion name",
+              "examples": [
+                "Status code is 200"
+              ]
+            },
+            "script": {
+              "type": "object",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the script",
+                  "examples": [
+                    ["scripts", "4aca585b-6aaf-4361-83f8-77546fe02685"]
+                  ]
+                }
+              }
+            },
+            "skipped": {
+              "type": "boolean",
+              "title": "Skipped Assertion",
+              "default": false,
+              "examples": [
+                true
+              ]
+            },
+            "error": {
+              "oneOf": [{
+                "type": "object",
+                "title": "Assertion Error",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "examples": [
+                      "AssertionError"
+                    ]
+                  },
+                  "index": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "examples": [
+                      0
+                    ]
+                  },
+                  "test": {
+                    "type": "string",
+                    "examples": [
+                      "UserId is correct"
+                    ]
+                  },
+                  "message": {
+                    "type": "string",
+                    "examples": [
+                      "expected {} to have property 'userId'"
+                    ]
+                  },
+                  "stack": {
+                    "type": "string",
+                    "examples": [
+                      "AssertionError: expected { secret: 0 } to have property 'userId'\n   at Object.eval sandbox-script.js:1:7)"
+                    ]
+                  }
+                }
+              }, {
+                "type": "null"
+              }]
+            }
+          }
+        }
+      }
+    },
+    "errors": {
+      "$id": "#/properties/errors",
+      "type": "object",
+      "title": "The Errors occurred during the execution",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "id",
+            "message",
+            "timestamp"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Error identifier",
+              "examples": [
+                "59461d8c-4a1b-4d91-bcda-1cf505532827"
+              ]
+            },
+            "type": {
+              "type": "string",
+              "title": "The error type",
+              "examples": [
+                "Error"
+              ]
+            },
+            "name": {
+              "type": "string",
+              "title": "The error name",
+              "examples": [
+                "ReferenceError"
+              ]
+            },
+            "message": {
+              "type": "string",
+              "title": "The error message",
+              "examples": [
+                "xyz is not defined"
+              ]
+            },
+            "checksum": {
+              "type": "string",
+              "title": "The error checksum",
+              "examples": [
+                "731b2e2c67c63af0acea1c782f545afc"
+              ]
+            },
+            "timestamp": {
+              "type": "integer",
+              "title": "Error timestamp",
+              "minimum": 0,
+              "examples": [
+                1538740077262
+              ]
+            },
+            "stacktrace": {
+              "oneOf": [{
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "consoles": {
+      "$id": "#/properties/console",
+      "type": "object",
+      "title": "The various console triggered during the execution",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "id",
+            "script",
+            "level",
+            "messages"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "Console identifier",
+              "examples": [
+                "59461d8c-4a1b-4d91-bcda-1cf505532827"
+              ]
+            },
+            "script": {
+              "type": "object",
+              "required": [
+                "$self"
+              ],
+              "properties": {
+                "$self": {
+                  "type": "array",
+                  "title": "Self reference to the script",
+                  "examples": [
+                    ["scripts", "08c683da-5c7e-4026-9f7f-da9da20ee24f"]
+                  ]
+                }
+              }
+            },
+            "level": {
+              "type": "string",
+              "title": "Log level",
+              "examples": [
+                "error"
+              ]
+            },
+            "messages": {
+              "type": "array",
+              "examples": [
+                ["This is a error log"]
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
