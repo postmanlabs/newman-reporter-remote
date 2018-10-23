@@ -2,7 +2,7 @@ const Ajv = require('ajv'),
     EXECUTION_SCHEMA = require('../../examples/schema.json');
 
 describe('Newman Library', function () {
-    const Validate = new Ajv().compile(EXECUTION_SCHEMA);
+    const validate = new Ajv().compile(EXECUTION_SCHEMA);
 
     it('should correctly execute for a successful run', function (done) {
         this.run({
@@ -10,7 +10,7 @@ describe('Newman Library', function () {
         },
         function (err, summary, requestBody) {
             expect(err).to.be.null;
-            expect(Validate(requestBody)).to.be.true;
+            expect(validate(requestBody)).to.be.true;
 
             return done(err);
         });
@@ -23,7 +23,7 @@ describe('Newman Library', function () {
         function (err, summary, requestBody) {
             expect(err).to.be.null;
             expect(summary.run.failures, 'should have 1 failure').to.have.lengthOf(1);
-            expect(Validate(requestBody)).to.be.true;
+            expect(validate(requestBody)).to.be.true;
 
             return done();
         });
@@ -35,7 +35,7 @@ describe('Newman Library', function () {
         }, function (err, summary, requestBody) {
             expect(err).to.be.null;
             expect(summary.run.failures, 'should have 2 failures').to.have.lengthOf(2);
-            expect(Validate(requestBody)).to.be.true;
+            expect(validate(requestBody)).to.be.true;
 
             return done();
         });
@@ -47,7 +47,7 @@ describe('Newman Library', function () {
         }, function (err, summary, requestBody) {
             expect(err).to.be.null;
             expect(summary.run.failures, 'should have 1 failure').to.have.lengthOf(1);
-            expect(Validate(requestBody)).to.be.true;
+            expect(validate(requestBody)).to.be.true;
 
             return done();
         });
@@ -58,7 +58,7 @@ describe('Newman Library', function () {
             collection: 'test/fixtures/sample-collection.json'
         }, function (err, summary, requestBody) {
             expect(err).to.be.null;
-            expect(Validate(requestBody)).to.be.true;
+            expect(validate(requestBody)).to.be.true;
 
             return done();
         });

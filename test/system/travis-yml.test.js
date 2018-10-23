@@ -1,7 +1,8 @@
+const fs = require('fs'),
+    yaml = require('js-yaml');
+
 describe('travis.yml', function () {
-    var fs = require('fs'),
-        yaml = require('js-yaml'),
-        travisYAML,
+    let travisYAML,
         travisYAMLError;
 
     try {

@@ -2,7 +2,7 @@
  * @fileOverview This test specs runs tests on the package.json file of repository. It has a set of strict tests on the
  * content of the file as well. Any change to package.json must be accompanied by valid test case in this spec-sheet.
  */
-var fs = require('fs'),
+const fs = require('fs'),
     path = require('path'),
     _ = require('lodash'),
     yml = require('js-yaml'),
@@ -10,7 +10,7 @@ var fs = require('fs'),
 
 describe('project repository', function () {
     describe('package.json', function () {
-        var content,
+        let content,
             json;
 
         try {
@@ -56,11 +56,11 @@ describe('project repository', function () {
             it('should exist', function () {
                 expect(json.scripts).to.be.ok;
                 json.scripts && Object.keys(json.scripts).forEach(function (scriptName) {
-                    var name = json.scripts[scriptName];
+                    let name = json.scripts[scriptName];
 
                     name = name.replace(/^(node\s|\.\/)/, '');
                     fs.stat(name, function (err) {
-                        var fileDetails = path.parse(name);
+                        let fileDetails = path.parse(name);
 
                         expect(err).to.equal(null);
                         expect(fileDetails.ext).to.match(/^\.(sh|js)$/);
@@ -71,7 +71,7 @@ describe('project repository', function () {
             it('should have the hashbang defined', function () {
                 expect(json.scripts).to.be.ok;
                 json.scripts && Object.keys(json.scripts).forEach(function (scriptName) {
-                    var fileDetails,
+                    let fileDetails,
                         name = json.scripts[scriptName].replace(/^(node\s|\.\/)/, '');
 
                     fileDetails = path.parse(name);
@@ -118,7 +118,7 @@ describe('project repository', function () {
             });
 
             it('should not overlap devDependencies', function () {
-                var clean = [];
+                let clean = [];
 
                 json.devDependencies && Object.keys(json.devDependencies).forEach(function (item) {
                     !json.dependencies[item] && clean.push(item);
@@ -157,7 +157,7 @@ describe('project repository', function () {
     });
 
     describe('.ignore files', function () {
-        var gitignorePath = '.gitignore',
+        let gitignorePath = '.gitignore',
             npmignorePath = '.npmignore',
             npmignore = parseIgnore(fs.readFileSync(npmignorePath, 'utf8')),
             gitignore = parseIgnore(fs.readFileSync(gitignorePath, 'utf8'));
