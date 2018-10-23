@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-/* global exit */
-require('shelljs/global');
 require('colors');
 
-var async = require('async'),
+const async = require('async'),
+    shell = require('shelljs'),
     ESLintCLIEngine = require('eslint').CLIEngine,
 
     /**
@@ -43,7 +42,7 @@ module.exports = function (exit) {
          * @returns {*}
          */
         function (report, next) {
-            var errorReport = ESLintCLIEngine.getErrorResults(report.results);
+            const errorReport = ESLintCLIEngine.getErrorResults(report.results);
             // log the result to CLI
 
             console.info(ESLintCLIEngine.getFormatter()(report.results));
@@ -56,4 +55,4 @@ module.exports = function (exit) {
 };
 
 // ensure we run this script exports if this is a direct stdin.tty run
-!module.parent && module.exports(exit);
+!module.parent && module.exports(shell.exit);

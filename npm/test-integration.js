@@ -1,11 +1,10 @@
 #!/usr/bin/env node
-/* global test, mkdir, rm, exit */
-require('shelljs/global');
 require('colors');
 
-var fs = require('fs'),
+const fs = require('fs'),
     path = require('path'),
     Mocha = require('mocha'),
+    shell = require('shelljs'),
     expect = require('chai').expect,
     newman = require('../node_modules/newman'),
     recursive = require('recursive-readdir'),
@@ -25,10 +24,10 @@ module.exports = function (exit) {
     // banner line
     console.info('Running Integration tests using mocha and shelljs...'.yellow.bold);
 
-    test('-d', COV_REPORT_PATH) && rm('-rf', COV_REPORT_PATH);
-    mkdir('-p', COV_REPORT_PATH);
+    shell.test('-d', COV_REPORT_PATH) && shell.rm('-rf', COV_REPORT_PATH);
+    shell.mkdir('-p', COV_REPORT_PATH);
 
-    var mocha = new Mocha({ timeout: 60000 }),
+    let mocha = new Mocha({ timeout: 60000 }),
         nyc = new NYC({
             reporter: ['text', 'text-summary', 'lcov'],
             reportDir: COV_REPORT_PATH,
@@ -74,11 +73,11 @@ module.exports = function (exit) {
             nyc.reset();
             nyc.writeCoverageFile();
             nyc.report();
-            exit(err);
+            shell.exit(err);
         });
         mocha = null; // cleanup
     });
 };
 
 // ensure we run this script exports if this is a direct stdin.tty run
-!module.parent && module.exports(exit);
+!module.parent && module.exports(shell.exit);

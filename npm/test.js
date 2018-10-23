@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-/* global exit */
-require('shelljs/global');
 require('colors');
 
-var prettyms = require('pretty-ms'),
+const prettyms = require('pretty-ms'),
+    shell = require('shelljs'),
+
     startedAt = Date.now();
 
 require('async').series([
@@ -13,5 +13,5 @@ require('async').series([
 ], function (code) {
     console.info(`\nnewman-reporter-remote: duration ${prettyms(Date.now() - startedAt)}\n
         newman-reporter-remote: ${code ? 'not ok' : 'ok'}!`[code ? 'red' : 'green']);
-    exit(code && (typeof code === 'number' ? code : 1) || 0);
+    shell.exit(code && (typeof code === 'number' ? code : 1) || 0);
 });

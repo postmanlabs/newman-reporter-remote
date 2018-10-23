@@ -1,9 +1,8 @@
 #!/usr/bin/env node
-/* global exit */
-require('shelljs/global');
 require('colors');
 
-var async = require('async'),
+const async = require('async'),
+    shell = require('shelljs'),
     packity = require('packity'),
     expect = require('chai').expect,
     Mocha = require('mocha'),
@@ -42,7 +41,7 @@ module.exports = function (exit) {
         function (next) {
             console.info('\nrunning system specs using mocha...');
 
-            var mocha = new Mocha();
+            let mocha = new Mocha();
 
             recursive(SPEC_SOURCE_DIR, function (err, files) {
                 if (err) {
@@ -73,4 +72,4 @@ module.exports = function (exit) {
 };
 
 // ensure we run this script exports if this is a direct stdin.tty run
-!module.parent && module.exports(exit);
+!module.parent && module.exports(shell.exit);
