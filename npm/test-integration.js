@@ -46,6 +46,9 @@ module.exports = function (exit) {
             return exit(1);
         }
 
+        // load the bootstrap file before all other files
+        mocha.addFile(path.join(SPEC_SOURCE_DIR, 'bootstrap.js'));
+
         files.filter(function (file) {
             return (file.substr(-8) === '.test.js');
         }).forEach(function (file) {

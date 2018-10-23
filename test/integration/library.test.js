@@ -1,118 +1,64 @@
-const nock = require('nock'),
-    Ajv = require('ajv'),
+const Ajv = require('ajv'),
     EXECUTION_SCHEMA = require('../../examples/schema.json');
 
 describe('Newman Library', function () {
-    before(function (done) {
-        var ajv = new Ajv(),
-            validate = ajv.compile(EXECUTION_SCHEMA);
-
-        nock('http://localhost:3000')
-            .persist()
-            .post('/summary')
-            .reply(200, function (uri, body, callback) {
-                expect(validate(body)).to.be.true;
-                callback(null, { success: true });
-            });
-
-        return done();
-    });
-
-    after(function () {
-        nock.cleanAll();
-    });
+    const Validate = new Ajv().compile(EXECUTION_SCHEMA);
 
     it('should correctly execute for a successful run', function (done) {
-        newman.run({
-            collection: 'test/fixtures/single-get-request.json',
-            reporters: ['remote'],
-            reporter: {
-                remote: {
-                    api: {
-                        method: 'POST',
-                        url: 'http://localhost:3000/summary'
-                    }
-                }
-            }
-        }, function (err) {
+        this.run({
+            collection: 'test/fixtures/single-get-request.json'
+        },
+        function (err, summary, requestBody) {
+            expect(err).to.be.null;
+            expect(Validate(requestBody)).to.be.true;
+
             return done(err);
         });
     });
 
     it('should correctly execute for a failed run', function (done) {
-        newman.run({
-            collection: 'test/fixtures/single-request-failing.json',
-            reporters: ['remote'],
-            reporter: {
-                remote: {
-                    api: {
-                        method: 'POST',
-                        url: 'http://localhost:3000/summary'
-                    }
-                }
-            }
-        }, function (err, summary) {
+        this.run({
+            collection: 'test/fixtures/single-request-failing.json'
+        },
+        function (err, summary, requestBody) {
             expect(err).to.be.null;
             expect(summary.run.failures, 'should have 1 failure').to.have.lengthOf(1);
+            expect(Validate(requestBody)).to.be.true;
 
             return done();
         });
     });
 
     it('should correctly execute for a run with AssertionError/TypeError', function (done) {
-        newman.run({
-            collection: 'test/fixtures/newman-report-test.json',
-            reporters: ['remote'],
-            reporter: {
-                remote: {
-                    api: {
-                        method: 'POST',
-                        url: 'http://localhost:3000/summary'
-                    }
-                }
-            }
-        }, function (err, summary) {
+        this.run({
+            collection: 'test/fixtures/newman-report-test.json'
+        }, function (err, summary, requestBody) {
             expect(err).to.be.null;
             expect(summary.run.failures, 'should have 2 failures').to.have.lengthOf(2);
+            expect(Validate(requestBody)).to.be.true;
 
             return done();
         });
     });
 
     it('should correctly execute for a run with one or more failed requests', function (done) {
-        newman.run({
-            collection: 'test/fixtures/failed-request.json',
-            reporters: ['remote'],
-            reporter: {
-                remote: {
-                    api: {
-                        method: 'POST',
-                        url: 'http://localhost:3000/summary'
-                    }
-                }
-            }
-        }, function (err, summary) {
+        this.run({
+            collection: 'test/fixtures/failed-request.json'
+        }, function (err, summary, requestBody) {
             expect(err).to.be.null;
             expect(summary.run.failures, 'should have 1 failure').to.have.lengthOf(1);
+            expect(Validate(requestBody)).to.be.true;
 
             return done();
         });
     });
 
     it('should correctly execute sample collection', function (done) {
-        newman.run({
-            collection: 'test/fixtures/sample-collection.json',
-            reporters: ['remote'],
-            reporter: {
-                remote: {
-                    api: {
-                        method: 'POST',
-                        url: 'http://localhost:3000/summary'
-                    }
-                }
-            }
-        }, function (err) {
+        this.run({
+            collection: 'test/fixtures/sample-collection.json'
+        }, function (err, summary, requestBody) {
             expect(err).to.be.null;
+            expect(Validate(requestBody)).to.be.true;
 
             return done();
         });
