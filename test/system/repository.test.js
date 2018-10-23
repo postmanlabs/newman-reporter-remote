@@ -31,7 +31,7 @@ describe('project repository', function () {
         describe('package.json JSON data', function () {
             it('should have valid name, description and author', function () {
                 expect(json).to.have.property('name', 'newman-reporter-remote');
-                expect(json).to.have.property('description', 'Newman remote reporter');
+                expect(json).to.have.property('description', 'Newman Remote Reporter');
                 expect(json).to.have.property('author', 'Postman Labs <help@getpostman.com> (=)');
                 expect(json).to.have.property('license', 'Apache-2.0');
 
