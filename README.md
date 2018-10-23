@@ -41,10 +41,20 @@ newman.run({
     reporters: 'remote',
     reporter: {
         remote: {
-            export: './summary.json', // If not specified, the file will be written to `newman/` in the current working directory.
-            api: { // request.js(https://github.com/request/request) options object
+            // export execution summary to disk
+            // if path is not specified, the file will be written to `newman/` in the current working directory.
+            export: './summary.json',
+
+            // post execution summary to remote endpoint
+            // request.js(https://github.com/request/request) options object
+            api: {
                 url: 'http://localhost:3000',
                 method: 'POST'
+            },
+
+            // custom handling of execution summary
+            callback: function(summary) {
+                // custom logic goes here
             }
         }
     }
