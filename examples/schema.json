@@ -2,7 +2,7 @@
   "$id": "https://schema.getpostman.com/json/execution/v1.0.0/execution.json",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
-  "title": "ERS Schema",
+  "title": "Execution Schema",
   "required": [
     "run",
     "collection",
@@ -231,6 +231,7 @@
             "$id": "#/properties/executions/items/properties/index",
             "type": "integer",
             "title": "Index of the executions",
+            "minimum": 0,
             "examples": [
               0
             ]
@@ -239,6 +240,7 @@
             "$id": "#/properties/executions/items/properties/branch",
             "type": "integer",
             "title": "For future use case of parallel runs",
+            "minimum": 0,
             "default": 0,
             "examples": [
               0
@@ -325,6 +327,7 @@
                 "$id": "#/properties/executions/items/properties/timings/properties/started",
                 "type": "integer",
                 "title": "Execution start time",
+                "minimum": 0,
                 "examples": [
                   1538740072277
                 ]
@@ -333,6 +336,7 @@
                 "$id": "#/properties/executions/items/properties/timings/properties/completed",
                 "type": "integer",
                 "title": "Execution end time",
+                "minimum": 0,
                 "examples": [
                   1538740072294
                 ]
@@ -548,6 +552,7 @@
             "code": {
               "type": "integer",
               "title": "Response status code",
+              "minimum": 0,
               "examples": [
                 200
               ]
@@ -555,6 +560,7 @@
             "responseTime": {
               "type": "integer",
               "title": "Response time",
+              "minimum": 0,
               "examples": [
                 4388
               ]
@@ -562,6 +568,7 @@
             "responseSize": {
               "type": "integer",
               "title": "Response size",
+              "minimum": 0,
               "examples": [
                 224
               ]
@@ -633,6 +640,7 @@
                   },
                   "index": {
                     "type": "integer",
+                    "minimum": 0,
                     "examples": [
                       0
                     ]
@@ -715,6 +723,7 @@
             "timestamp": {
               "type": "integer",
               "title": "Error timestamp",
+              "minimum": 0,
               "examples": [
                 1538740077262
               ]
