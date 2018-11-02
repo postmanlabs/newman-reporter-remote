@@ -27,6 +27,7 @@ $ newman run collection.json -r remote --reporter-remote-api '{"url": "http://lo
 
 | CLI Option  | Description       |
 |-------------|-------------------|
+| `--reporter-remote-run-id <runId>` | Set custom run id. (default: UUID4) |
 | `--reporter-remote-export <path>` | Specify a path where the output JSON file will be written to disk. If not specified, the file will be written to `newman/` in the current working directory. |
 | `--reporter-remote-api <json>` | Specify the [request.js options](https://github.com/request/request/#requestoptions-callback) which will be used to post execution summary to the specified endpoint. |
 
@@ -41,6 +42,8 @@ newman.run({
     reporters: 'remote',
     reporter: {
         remote: {
+            // set custom run id
+            runId: '12345',
             // export execution summary to disk
             // if path is not specified, the file will be written to `newman/` in the current working directory.
             export: './summary.json',
