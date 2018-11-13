@@ -1,4 +1,7 @@
 # newman-reporter-remote
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/postmanlabs/newman-reporter-remote.svg)](https://greenkeeper.io/)
+
 A Remote reporter for [Newman](https://github.com/postmanlabs/newman) that posts aggregated information for each execution
 in a collection run to the remote location or save to disk in JSON format.
 This needs to be used in conjunction with Newman so that it can recognize Remote reporting options.
