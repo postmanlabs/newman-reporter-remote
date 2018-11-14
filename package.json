@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-remote",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "Newman Remote Reporter",
   "homepage": "https://github.com/postmanlabs/newman-reporter-remote",
   "bugs": "https://github.com/postmanlabs/newman-reporter-remote/issues",
