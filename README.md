@@ -76,7 +76,7 @@ newman.run({
 
 | **newman-reporter-remote** | **newman** | **node** |
 |:--------------------------:|:----------:|:--------:|
-|           v0.1.0           | >= v4.0.0  | >= v6.x  |
+|           v0.1.0           | >= v4.1.0  | >= v6.x  |
 
 ## Community Support
 
