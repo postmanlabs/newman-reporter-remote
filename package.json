@@ -41,7 +41,7 @@
     "eslint-plugin-security": "1.4.0",
     "jsdoc": "3.5.5",
     "jsdoc-to-markdown": "4.0.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.12",
     "mocha": "6.0.2",
     "newman": "4.5.1",
     "nock": "10.0.6",
