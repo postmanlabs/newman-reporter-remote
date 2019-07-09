@@ -59,6 +59,8 @@
     "node": ">=6"
   },
   "greenkeeper": {
-    "ignore": []
+    "ignore": [
+      "eslint-plugin-jsdoc"
+    ]
   }
 }
