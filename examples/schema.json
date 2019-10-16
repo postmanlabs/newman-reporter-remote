@@ -9,6 +9,7 @@
     "environment",
     "items",
     "executions",
+    "exceptions",
     "scripts",
     "events",
     "requests",
@@ -340,6 +341,28 @@
                   1538740072294
                 ]
               }
+            }
+          }
+        }
+      }
+    },
+    "exceptions": {
+      "$id": "#/properties/exceptions",
+      "type": "object",
+      "title": "The Exceptions Schema",
+      "patternProperties": {
+        "[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$": {
+          "type": "object",
+          "required": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "The id of this exception",
+              "examples": [
+                "4cb5637c-e2d2-4fa2-96de-387c052b9aa9"
+              ]
             }
           }
         }
