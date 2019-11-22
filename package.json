@@ -34,7 +34,7 @@
     "chai": "4.2.0",
     "colors": "1.4.0",
     "editorconfig": "0.15.3",
-    "eslint": "5.15.3",
+    "eslint": "6.7.0",
     "eslint-plugin-jsdoc": "4.6.0",
     "eslint-plugin-lodash": "6.0.0",
     "eslint-plugin-mocha": "6.2.0",
