@@ -1,0 +1,56 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - nyc > istanbul-reports > handlebars > async > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - eslint > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - eslint-plugin-jsdoc > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - eslint-plugin-lodash > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - nock > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - eslint > table > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - jsdoc > catharsis > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - jsdoc > requizzle > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - mocha > yargs-unparser > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-collection > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-collection-transformer > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-runtime > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-runtime > postman-collection > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-runtime > async > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-runtime > postman-sandbox > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - jsdoc-to-markdown > jsdoc-api > jsdoc > catharsis > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - jsdoc-to-markdown > jsdoc-api > jsdoc > requizzle > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - newman > postman-runtime > postman-sandbox > uvm > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
+    - nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2020-05-01T00:36:18.177Z'
